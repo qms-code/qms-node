@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /b-api
+  name: ingress-qms-node-b
+  namespace: development
+spec:
+  tls:
+  - hosts:
+    - b-dev.qms888.com
+    secretName: b-dev.qms888.com
+  rules:
+  - host: b-dev.qms888.com
+    http:
+      paths:
+      - path: /b-node/
+        backend:
+          serviceName: qms-node
+          servicePort: 80

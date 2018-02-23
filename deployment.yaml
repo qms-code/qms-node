@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: qms-node 
+  namespace: development
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: qms-node
+    spec:
+      containers:
+      - image: registry.meia8.com/front-end/qms-node:latest
+        env: 
+        - name: NODE_ENV
+          value: http://qmsauth.development
+        - name: SHOP
+          value: http://gourmet.development
+        - name: USER
+          value: http://qmsuser.development
+        - name: MIU
+          value: dev
+        command:
+        - node
+        - app
+        imagePullPolicy: Always
+        name: qms-node
+      imagePullSecrets:
+        - name: "registry.meia8.com"
+      restartPolicy: Always

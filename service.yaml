@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: qms-node
+  namespace: development
+  labels:
+    app: qms-node
+spec:
+  selector:
+    app: qms-node
+  ports:
+  - port: 80
+    targetPort: 3005
+    name: http
